@@ -1,11 +1,13 @@
 {
   "name": "zap-shift-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "REST API for ZapShift, a parcel delivery platform (Express, MongoDB, Firebase Auth, Stripe)",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test": "node --test",
+    "check": "node --check index.js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +21,9 @@
     "stripe": "^20.4.0"
   },
   "devDependencies": {
-    "nodemon": "^1.14.10"
+    "nodemon": "^3.1.14"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
