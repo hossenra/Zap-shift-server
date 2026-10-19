@@ -2,7 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
-const admin = require("firebase-admin");
+const { initializeApp, cert } = require("firebase-admin/app");
+const { getAuth } = require("firebase-admin/auth");
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -15,8 +16,8 @@ app.use(express.json());
 
 const serviceAccount = require("./firebase-admin-key.json");
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+initializeApp({
+  credential: cert(serviceAccount),
 });
 
 // Helpers
@@ -76,7 +77,7 @@ async function run() {
       }
 
       try {
-        const decoded = await admin.auth().verifyIdToken(token);
+        const decoded = await getAuth().verifyIdToken(token);
         req.decoded = decoded;
         next();
       } catch (error) {
